@@ -4,357 +4,220 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Project Files</title>
-
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        min-height: 100vh;
-        font-family: Inter, "Segoe UI", Arial, sans-serif;
-        color: #f5f7ff;
-        background:
-            radial-gradient(circle at 15% 20%, rgba(110, 80, 255, .22), transparent 28%),
-            radial-gradient(circle at 85% 80%, rgba(0, 210, 255, .16), transparent 30%),
-            #080b14;
-        overflow-x: hidden;
-    }
-
-    /* Subtle futuristic pattern */
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: .22;
-        background-image:
-            linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-        background-size: 42px 42px;
-        mask-image: linear-gradient(to bottom, black, transparent 90%);
-    }
-
-    .glow {
-        position: fixed;
-        width: 280px;
-        height: 280px;
-        border-radius: 50%;
-        filter: blur(100px);
-        opacity: .18;
-        pointer-events: none;
-    }
-
-    .glow.one {
-        background: #7657ff;
-        top: -100px;
-        left: -80px;
-    }
-
-    .glow.two {
-        background: #00c8ff;
-        right: -100px;
-        bottom: -100px;
-    }
-
-    header {
-        max-width: 1100px;
-        margin: auto;
-        padding: 75px 24px 35px;
-        position: relative;
-    }
-
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 13px;
-        border: 1px solid rgba(255,255,255,.12);
-        border-radius: 999px;
-        background: rgba(255,255,255,.055);
-        backdrop-filter: blur(12px);
-        color: #b9c3ff;
-        font-size: 13px;
-        letter-spacing: .4px;
-        margin-bottom: 20px;
-    }
-
-    .dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #63e6be;
-        box-shadow: 0 0 12px #63e6be;
-    }
-
-    h1 {
-        font-size: clamp(42px, 7vw, 76px);
-        line-height: .98;
-        letter-spacing: -3px;
-        max-width: 800px;
-        background: linear-gradient(120deg, #ffffff 20%, #aebaff 55%, #71e6ff);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-
-    .subtitle {
-        margin-top: 20px;
-        max-width: 650px;
-        color: #9ca5bd;
-        font-size: 17px;
-        line-height: 1.7;
-    }
-
-    main {
-        max-width: 1100px;
-        margin: auto;
-        padding: 10px 24px 70px;
-    }
-
-    .toolbar {
-        display: flex;
-        gap: 14px;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 25px;
-        flex-wrap: wrap;
-    }
-
-    .section-title {
-        font-size: 21px;
-        font-weight: 700;
-    }
-
-    .count {
-        color: #7f8aa7;
-        font-size: 14px;
-        margin-left: 8px;
-        font-weight: 400;
-    }
-
-    .search {
-        width: min(100%, 300px);
-        padding: 13px 17px;
-        border-radius: 14px;
-        border: 1px solid rgba(255,255,255,.1);
-        outline: none;
-        background: rgba(255,255,255,.055);
-        color: white;
-        font-size: 14px;
-        backdrop-filter: blur(12px);
-    }
-
-    .search::placeholder {
-        color: #707a94;
-    }
-
-    .search:focus {
-        border-color: rgba(120,140,255,.55);
-        box-shadow: 0 0 0 3px rgba(100,110,255,.08);
-    }
-
-    .files {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 16px;
-    }
-
-    .file-card {
-        position: relative;
-        padding: 22px;
-        min-height: 145px;
-        border: 1px solid rgba(255,255,255,.09);
-        border-radius: 20px;
-        background: linear-gradient(
-            145deg,
-            rgba(255,255,255,.075),
-            rgba(255,255,255,.025)
-        );
-        backdrop-filter: blur(16px);
-        box-shadow: 0 15px 45px rgba(0,0,0,.18);
-        transition: transform .25s ease, border-color .25s ease, background .25s ease;
-        text-decoration: none;
-        color: inherit;
-        display: block;
-    }
-
-    .file-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(140,155,255,.38);
-        background: linear-gradient(
-            145deg,
-            rgba(110,120,255,.12),
-            rgba(255,255,255,.035)
-        );
-    }
-
-    .file-icon {
-        width: 43px;
-        height: 43px;
-        display: grid;
-        place-items: center;
-        border-radius: 12px;
-        background: rgba(120,135,255,.12);
-        font-size: 21px;
-        margin-bottom: 17px;
-    }
-
-    .file-name {
-        font-size: 16px;
-        font-weight: 650;
-        word-break: break-word;
-    }
-
-    .file-type {
-        margin-top: 7px;
-        color: #77829d;
-        font-size: 13px;
-    }
-
-    .arrow {
-        position: absolute;
-        right: 20px;
-        bottom: 20px;
-        color: #7e8cff;
-        font-size: 18px;
-        transition: transform .2s ease;
-    }
-
-    .file-card:hover .arrow {
-        transform: translateX(4px);
-    }
-
-    .empty {
-        display: none;
-        text-align: center;
-        padding: 60px 20px;
-        color: #77829d;
-        border: 1px dashed rgba(255,255,255,.1);
-        border-radius: 20px;
-    }
-
-    footer {
-        text-align: center;
-        color: #59627a;
-        font-size: 13px;
-        padding: 15px 20px 35px;
-    }
-
-    @media (max-width: 600px) {
-        header {
-            padding-top: 50px;
-        }
-
-        h1 {
-            letter-spacing: -2px;
-        }
-
-        .toolbar {
-            align-items: stretch;
-        }
-
-        .search {
-            width: 100%;
-        }
-    }
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    min-height:100vh;color:#f5f7ff;
+    font-family:Inter,"Segoe UI",Arial,sans-serif;
+    background:
+      radial-gradient(circle at 12% 18%,rgba(112,82,255,.24),transparent 28%),
+      radial-gradient(circle at 88% 82%,rgba(0,205,255,.16),transparent 30%),
+      #080b14;
+}
+body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:42px 42px;
+}
+.wrap{max-width:1100px;margin:auto;padding:60px 24px 70px;position:relative}
+.badge{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 13px;
+    border:1px solid rgba(255,255,255,.12);border-radius:999px;
+    background:rgba(255,255,255,.055);color:#b9c3ff;font-size:13px;
+    letter-spacing:.4px;margin-bottom:20px
+}
+.dot{width:7px;height:7px;border-radius:50%;background:#63e6be;box-shadow:0 0 12px #63e6be}
+h1{
+    font-size:clamp(40px,7vw,68px);line-height:1;letter-spacing:-3px;
+    background:linear-gradient(120deg,#fff 20%,#aebaff 55%,#71e6ff);
+    -webkit-background-clip:text;background-clip:text;color:transparent
+}
+.subtitle{margin-top:18px;color:#9ca5bd;font-size:16px;line-height:1.7}
+.toolbar{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin:38px 0 22px}
+.title{font-size:20px;font-weight:700}
+.count{color:#77829d;font-size:14px;font-weight:400;margin-left:8px}
+.search{
+    width:min(100%,320px);padding:13px 16px;border-radius:14px;
+    border:1px solid rgba(255,255,255,.1);outline:none;
+    background:rgba(255,255,255,.055);color:#fff;font-size:14px
+}
+.search:focus{border-color:rgba(140,155,255,.55);box-shadow:0 0 0 3px rgba(100,110,255,.08)}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.file-card{
+    position:relative;display:block;min-height:158px;padding:21px;
+    border:1px solid rgba(255,255,255,.09);border-radius:20px;
+    background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+    backdrop-filter:blur(16px);text-decoration:none;color:inherit;
+    transition:.25s ease
+}
+.file-card:hover{transform:translateY(-5px);border-color:rgba(140,155,255,.38);
+    background:linear-gradient(145deg,rgba(110,120,255,.12),rgba(255,255,255,.035))}
+.file-icon{width:43px;height:43px;display:grid;place-items:center;border-radius:12px;
+    background:rgba(120,135,255,.12);font-size:21px;margin-bottom:15px}
+.file-name{font-size:15px;font-weight:650;word-break:break-word;padding-right:24px}
+.file-meta{margin-top:8px;color:#8e99b4;font-size:12px;word-break:break-word}
+.file-type{margin-top:5px;color:#66718b;font-size:12px}
+.arrow{position:absolute;right:20px;bottom:19px;color:#7e8cff;font-size:18px}
+.empty{display:none;text-align:center;padding:60px;color:#77829d;border:1px dashed rgba(255,255,255,.1);border-radius:20px}
+footer{text-align:center;color:#59627a;font-size:13px;margin-top:45px}
+@media(max-width:600px){.wrap{padding-top:42px}.toolbar{align-items:stretch}.search{width:100%}}
 </style>
 </head>
-
 <body>
+<div class="wrap">
+  <div class="badge"><span class="dot"></span> PROJECT ARCHIVE</div>
+  <h1>Project Files.</h1>
+  <p class="subtitle">All files from the project archive, organized and ready to open directly.</p>
 
-<div class="glow one"></div>
-<div class="glow two"></div>
+  <div class="toolbar">
+    <div class="title">Files <span class="count" id="count"></span></div>
+    <input class="search" id="search" type="search" placeholder="Search files..." autocomplete="off">
+  </div>
 
-<header>
-    <div class="badge">
-        <span class="dot"></span>
-        PROJECT ARCHIVE
-    </div>
-
-    <h1>Project Files.</h1>
-
-    <p class="subtitle">
-        A clean little space for storing and accessing project files.
-        Choose a file below to open it directly from the repository.
-    </p>
-</header>
-
-<main>
-    <div class="toolbar">
-        <div class="section-title">
-            Files <span class="count" id="fileCount"></span>
-        </div>
-
-        <input
-            class="search"
-            id="search"
-            type="search"
-            placeholder="Search files..."
-            autocomplete="off"
-        >
-    </div>
-
-    <div class="files" id="files">
-
-        <!--
-        ADD YOUR FILES HERE.
-
-        Example:
-        <a class="file-card" href="project_files/myfile.pdf" target="_blank">
-            <div class="file-icon">📄</div>
-            <div class="file-name">myfile.pdf</div>
-            <div class="file-type">PDF Document</div>
-            <div class="arrow">→</div>
-        </a>
-        -->
-
-        <a class="file-card" href="projects_files/" target="_blank">
-            <div class="file-icon">📁</div>
-            <div class="file-name">Project Files</div>
-            <div class="file-type">Browse projects_files folder</div>
-            <div class="arrow">→</div>
-        </a>
-
-    </div>
-
-    <div class="empty" id="empty">
-        No files found.
-    </div>
-</main>
-
-<footer>
-    Hosted with GitHub Pages · Project Archive
-</footer>
+  <div class="files" id="files">
+    
+    <a class="file-card" href="alona/MARK ANALYSIS/MARK ANALYSIS.docx" target="_blank">
+        <div class="file-icon">📘</div>
+        <div class="file-name">MARK ANALYSIS.docx</div>
+        <div class="file-meta">alona · MARK ANALYSIS</div>
+        <div class="file-type">Word Document</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="alona/MARK ANALYSIS/MARK ANALYSIS.pdf" target="_blank">
+        <div class="file-icon">📕</div>
+        <div class="file-name">MARK ANALYSIS.pdf</div>
+        <div class="file-meta">alona · MARK ANALYSIS</div>
+        <div class="file-type">PDF Document</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="alona/MARK ANALYSIS/MARK ANALYSIS.py" target="_blank">
+        <div class="file-icon">🐍</div>
+        <div class="file-name">MARK ANALYSIS.py</div>
+        <div class="file-meta">alona · MARK ANALYSIS</div>
+        <div class="file-type">Python File</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="alona/MARK ANALYSIS/studentdata.csv" target="_blank">
+        <div class="file-icon">📊</div>
+        <div class="file-name">studentdata.csv</div>
+        <div class="file-meta">alona · MARK ANALYSIS</div>
+        <div class="file-type">CSV Data File</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="analeena/LITERACY RATE ANALYSIS/LITERACY RATE ANALYSIS.docx" target="_blank">
+        <div class="file-icon">📘</div>
+        <div class="file-name">LITERACY RATE ANALYSIS.docx</div>
+        <div class="file-meta">analeena · LITERACY RATE ANALYSIS</div>
+        <div class="file-type">Word Document</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="analeena/LITERACY RATE ANALYSIS/LITERACY RATE ANALYSIS.pdf" target="_blank">
+        <div class="file-icon">📕</div>
+        <div class="file-name">LITERACY RATE ANALYSIS.pdf</div>
+        <div class="file-meta">analeena · LITERACY RATE ANALYSIS</div>
+        <div class="file-type">PDF Document</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="analeena/LITERACY RATE ANALYSIS/LITERACY RATE ANALYSIS.py" target="_blank">
+        <div class="file-icon">🐍</div>
+        <div class="file-name">LITERACY RATE ANALYSIS.py</div>
+        <div class="file-meta">analeena · LITERACY RATE ANALYSIS</div>
+        <div class="file-type">Python File</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="analeena/LITERACY RATE ANALYSIS/project.csv" target="_blank">
+        <div class="file-icon">📊</div>
+        <div class="file-name">project.csv</div>
+        <div class="file-meta">analeena · LITERACY RATE ANALYSIS</div>
+        <div class="file-type">CSV Data File</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="anugraha/ANALYSING IPL DATA/Analysing IPL Data.docx" target="_blank">
+        <div class="file-icon">📘</div>
+        <div class="file-name">Analysing IPL Data.docx</div>
+        <div class="file-meta">anugraha · ANALYSING IPL DATA</div>
+        <div class="file-type">Word Document</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="anugraha/ANALYSING IPL DATA/Analysing IPL Data.pdf" target="_blank">
+        <div class="file-icon">📕</div>
+        <div class="file-name">Analysing IPL Data.pdf</div>
+        <div class="file-meta">anugraha · ANALYSING IPL DATA</div>
+        <div class="file-type">PDF Document</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="anugraha/ANALYSING IPL DATA/Analysing IPL Data.py" target="_blank">
+        <div class="file-icon">🐍</div>
+        <div class="file-name">Analysing IPL Data.py</div>
+        <div class="file-meta">anugraha · ANALYSING IPL DATA</div>
+        <div class="file-type">Python File</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="anugraha/ANALYSING IPL DATA/matches.csv" target="_blank">
+        <div class="file-icon">📊</div>
+        <div class="file-name">matches.csv</div>
+        <div class="file-meta">anugraha · ANALYSING IPL DATA</div>
+        <div class="file-type">CSV Data File</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="hanna/CREDIT CARD ANALYSIS/BankChurners (1).csv" target="_blank">
+        <div class="file-icon">📊</div>
+        <div class="file-name">BankChurners (1).csv</div>
+        <div class="file-meta">hanna · CREDIT CARD ANALYSIS</div>
+        <div class="file-type">CSV Data File</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="hanna/CREDIT CARD ANALYSIS/BankChurners (1).xlsx" target="_blank">
+        <div class="file-icon">📗</div>
+        <div class="file-name">BankChurners (1).xlsx</div>
+        <div class="file-meta">hanna · CREDIT CARD ANALYSIS</div>
+        <div class="file-type">Spreadsheet</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="hanna/CREDIT CARD ANALYSIS/Credit Card Analysis.docx" target="_blank">
+        <div class="file-icon">📘</div>
+        <div class="file-name">Credit Card Analysis.docx</div>
+        <div class="file-meta">hanna · CREDIT CARD ANALYSIS</div>
+        <div class="file-type">Word Document</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="hanna/CREDIT CARD ANALYSIS/Credit Card Analysis.pdf" target="_blank">
+        <div class="file-icon">📕</div>
+        <div class="file-name">Credit Card Analysis.pdf</div>
+        <div class="file-meta">hanna · CREDIT CARD ANALYSIS</div>
+        <div class="file-type">PDF Document</div>
+        <div class="arrow">→</div>
+    </a>
+    <a class="file-card" href="hanna/CREDIT CARD ANALYSIS/Credit card analysis.py" target="_blank">
+        <div class="file-icon">🐍</div>
+        <div class="file-name">Credit card analysis.py</div>
+        <div class="file-meta">hanna · CREDIT CARD ANALYSIS</div>
+        <div class="file-type">Python File</div>
+        <div class="arrow">→</div>
+    </a>
+  </div>
+  <div class="empty" id="empty">No files found.</div>
+  <footer>Project Archive · GitHub Pages</footer>
+</div>
 
 <script>
-    const search = document.getElementById("search");
-    const cards = [...document.querySelectorAll(".file-card")];
-    const empty = document.getElementById("empty");
-    const count = document.getElementById("fileCount");
-
-    function updateFiles() {
-        const query = search.value.toLowerCase().trim();
-        let visible = 0;
-
-        cards.forEach(card => {
-            const name = card.querySelector(".file-name").textContent.toLowerCase();
-            const match = name.includes(query);
-
-            card.style.display = match ? "block" : "none";
-
-            if (match) visible++;
-        });
-
-        count.textContent = `${visible} file${visible === 1 ? "" : "s"}`;
-        empty.style.display = visible === 0 ? "block" : "none";
-    }
-
-    search.addEventListener("input", updateFiles);
-    updateFiles();
+const search=document.getElementById("search");
+const cards=[...document.querySelectorAll(".file-card")];
+const empty=document.getElementById("empty");
+const count=document.getElementById("count");
+function update(){
+  const q=search.value.toLowerCase().trim();
+  let n=0;
+  cards.forEach(c=>{
+    const match=c.textContent.toLowerCase().includes(q);
+    c.style.display=match?"block":"none";
+    if(match)n++;
+  });
+  count.textContent=`${n} file${n===1?"":"s"}`;
+  empty.style.display=n?"none":"block";
+}
+search.addEventListener("input",update); update();
 </script>
-
 </body>
 </html>
